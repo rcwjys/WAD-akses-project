@@ -7,86 +7,103 @@
 <!-- Import Layouting -->
 @section('content')
 
-<style>
-    body {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: #f8f9fa;
-        /* Optional background color */
-    }
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            /* Optional background color */
+        }
 
-    .login-container {
-        max-width: 800px;
-    }
+        .login-container {
+            max-width: 800px;
+        }
 
-    .login-btn {
-        background-color: #019F90;
-        color: #fff;
-    }
+        .login-btn {
+            background-color: #019F90;
+            color: #fff;
+        }
 
-    .login-btn {
-        background-color: #019F90;
-        color: #fff;
-        transition: transform 0.3s;
-    }
+        .login-btn {
+            background-color: #019F90;
+            color: #fff;
+            transition: transform 0.3s;
+        }
 
-    .login-btn:hover {
-        transform: scale(1.02);
-        color: #fff;
-        /* Resetting text color on hover */
-        background-color: #019F90;
-        /* Resetting background color on hover */
-        box-shadow: none;
-        /* Resetting box-shadow on hover */
-    }
+        .login-btn:hover {
+            transform: scale(1.02);
+            color: #fff;
+            /* Resetting text color on hover */
+            background-color: #019F90;
+            /* Resetting background color on hover */
+            box-shadow: none;
+            /* Resetting box-shadow on hover */
+        }
 
-    .footer_section {
-        background-color: #f8f9fa;
-    }
+        .footer_section {
+            background-color: #f8f9fa;
+        }
 
-    a.back-link {
-        color: #019F90;
-    }
-</style>
-</head>
+        a.back-link {
+            color: #019F90;
+        }
+    </style>
+    </head>
 
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="login-container">
-                    <h2 class="text-center mb-5">Login</h2>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="login-container">
+                        @if (session()->has('registerProcessMessage'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('registerProcessMessage') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
 
-                    <form action="" method="POST">
-                        <div class="form-group">
-                            <label for="username">Email</label>
-                            <input type="email" name="email" class="form-control" id="username">
-                            <p class="text-danger mt-1"></p>
-                        </div>
+                        @if (session()->has('loginProcess'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('loginProcess') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
 
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" id="password">
-                            <p class="text-danger mt-1"></p>
-                        </div>
+                        <h2 class="text-center mb-5">Login</h2>
 
-                        <div class="form-group">
-                            <p class="text-danger mt-1"></p>
-                        </div>
+                        <form action="{{ route('admin.loginPage') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="username">Email</label>
+                                <input type="email" name="employeeEmail"
+                                    class="form-control @error('employeeEmail') is-invalid @enderror" required
+                                    value="{{ old('employeeEmail') }}"" id="email" autofocus>
+                                @error('employeeEmail')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
 
-                        <div class="form-group text-right">
-                            <a href="{{route('customer.index')}}" class="back-link">Kembali</a>
-                        </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="employeePassword" class="form-control" id="password" required>
+                            </div>
 
-                        <button type="submit" name="login" class="btn btn-block login-btn">Login</button>
-                    </form>
+                            <div class="form-group text-right">
+                                <a href="{{ route('customer.index') }}" class="back-link">Kembali</a>
+                            </div>
+
+                            <button type="submit" name="login" class="btn btn-block login-btn">Login</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
     @endsection
