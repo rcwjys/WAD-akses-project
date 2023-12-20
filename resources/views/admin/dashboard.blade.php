@@ -5,7 +5,7 @@
 @section('title', 'Halaman Beranda | UPTD Puskesmas Babakan Tarogong')
 
 <!-- Set class active -->
-@section('home', 'active')
+@section('index', 'active')
 
 <!-- Import Layouting -->
 @section('content')

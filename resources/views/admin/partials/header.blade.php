@@ -42,7 +42,7 @@
                      <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
                          <ul class="navbar-nav ">
                              <li class="nav-item active">
-                                 <a class="nav-link @yield('home')" href="/">Beranda</a>
+                                 <a class="nav-link @yield('index')" href="/">Beranda</a>
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link @yield('formularium')" href="">Formularium</a>
@@ -60,15 +60,15 @@
                                  <a class="nav-link @yield('pesan')" href="">pesan</a>
                              </li>
                              <li class="nav-item">
-                                 <a class="nav-link" href="@yield('pesan')"">Kelas Obat</a>
+                                 <a class="nav-link @yield('class')" href="">Kelas Obat</a>
                              </li>
                              <li class="nav-item">
-                                 <a class="nav-link" href="@yield('pesan')"">Sub Kelas Obat</a>
+                                 <a class="nav-link @yield('sub-class')"
+                                     href="{{ route('admin.medicine-sub-class') }}">Sub Kelas Obat</a>
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link" href="{{ route('admin.logout') }}">Logout</a>
                              </li>
-
                          </ul>
                      </div>
                  </div>
