@@ -179,7 +179,8 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="form_container">
-                    <form action="" method="POST">
+                    <form action="{{ url('/messages/create') }}" method="POST">
+                        @csrf
                         <div>
                             <input type="text" name="fullname" placeholder="Nama Lengkap" autocomplete="off" />
                             <p class="text-danger"></p>

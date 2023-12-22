@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\subClassController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::get('/persediaan-obat', [indexController::class, 'accessMedicinePage'])->
 Route::get('/login', [LoginController::class, 'loginPage'])->name('admin.loginPage')->middleware([GuestMiddleware::class]);
 
 route::post('/login', [LoginController::class, 'loginProcess'])->middleware([GuestMiddleware::class]);
+
+route::post('/messages/create', [MessageController::class, 'store'])->name('message.create');
 
 
 // * Routing For Admin
@@ -41,7 +44,12 @@ route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassContr
 
 route::put('/medicine-sub-class/detail/edit', [subClassController::class, 'submitEdiFormSubClass'])->middleware([AuthMiddleware::class]);
 
-#puput
+route::get('/messages', [MessageController::class, 'index']);
+
+route::get('/messages/{messageId}', [MessageController::class, 'showDetail'])->name('message-detail');
+
+route::get('/messages/delete/{messagheId}', [MessageController::class, 'deleteMessage']);
+
 route::get('/medicine-class', [MedicineController::class, 'classPage'])->name('admin.medicine-class')->middleware([AuthMiddleware::class]);
 
 route::get('/medicine-class/create', [MedicineController::class, 'getFormForClass'])->name('admin.create-form')->middleware([AuthMiddleware::class]);
@@ -55,7 +63,6 @@ route::get('/medicine-class/delete/{TherapyClassId}', [MedicineController::class
 route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::class, 'getEditform'])->name('admin.edit-form-class')->middleware([AuthMiddleware::class]);
 
 route::put('/medicine-class/detail/edit', [MedicineController::class, 'submitEditFormClass'])->middleware([AuthMiddleware::class]);
-
 
 // * Authentication 
 Route::get('/register', [RegisterController::class, 'registerPage'])->name('admin.registerPage')->middleware([AuthMiddleware::class]);
