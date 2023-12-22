@@ -58,7 +58,7 @@ class SubClassController extends Controller
         return redirect(route('admin.medicine-sub-class'));
     }
 
-    public function getEditorm(Request $request)
+    public function getEditform(Request $request)
     {
         $subMedicineClass = DB::table('subtherapyclasses')->where('subTherapyClassId', $request->subTherapyClassId)->first();
 

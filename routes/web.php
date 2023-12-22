@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\subClassController;
+use App\Http\Controllers\ClassController;
+use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
 // * Middleware
@@ -27,7 +29,7 @@ route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('ad
 
 route::get('/medicine-sub-class', [SubClassController::class, 'subclassPage'])->name('admin.medicine-sub-class')->middleware([AuthMiddleware::class]);
 
-route::get('/medicine-sub-class/create', [subClassController::class, 'getFormForSubClass'])->name('admin.create-form')->middleware([AuthMiddleware::class]);
+route::get('/medicine-sub-class/create', [subClassController::class, 'getFormForSubClass'])->name('admin.create-sub-class')->middleware([AuthMiddleware::class]);
 
 route::post('/medicine-sub-class/create', [subClassController::class, 'submitFormForSubClass'])->name('admin.submit-form')->middleware([AuthMiddleware::class]);
 
@@ -35,11 +37,24 @@ route::get('/medicine-sub-class/detail/{subTherapyClassId}', [subClassController
 
 route::get('/medicine-sub-class/delete/{subTherapyClassId}', [subClassController::class, 'deleteSubClass'])->name('admin.delete-sub-class')->middleware([AuthMiddleware::class]);
 
-route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassController::class, 'getEditorm'])->name('admin.edit-form')->middleware([AuthMiddleware::class]);
+route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassController::class, 'getEditform'])->name('admin.edit-form')->middleware([AuthMiddleware::class]);
 
 route::put('/medicine-sub-class/detail/edit', [subClassController::class, 'submitEdiFormSubClass'])->middleware([AuthMiddleware::class]);
 
+#puput
+route::get('/medicine-class', [MedicineController::class, 'classPage'])->name('admin.medicine-class')->middleware([AuthMiddleware::class]);
 
+route::get('/medicine-class/create', [MedicineController::class, 'getFormForClass'])->name('admin.create-form')->middleware([AuthMiddleware::class]);
+
+route::post('/medicine-class/create/', [MedicineController::class, 'submitFormForClass'])->name('admin.submit-form-class')->middleware([AuthMiddleware::class]);
+
+route::get('/medicine-class/detail/{TherapyClassId}', [MedicineController::class, 'getDetailClass'])->name('admin.detailclass')->middleware([AuthMiddleware::class]);
+
+route::get('/medicine-class/delete/{TherapyClassId}', [MedicineController::class, 'deleteClass'])->name('admin.delete-class')->middleware([AuthMiddleware::class]);
+
+route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::class, 'getEditform'])->name('admin.edit-form-class')->middleware([AuthMiddleware::class]);
+
+route::put('/medicine-class/detail/edit', [MedicineController::class, 'submitEditFormClass'])->middleware([AuthMiddleware::class]);
 
 
 // * Authentication 

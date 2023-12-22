@@ -60,7 +60,7 @@
                                  <a class="nav-link @yield('pesan')" href="">pesan</a>
                              </li>
                              <li class="nav-item">
-                                 <a class="nav-link @yield('class')" href="">Kelas Obat</a>
+                                 <a class="nav-link @yield('class')" href="{{ route('admin.medicine-class') }}">Kelas Obat</a>
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link @yield('sub-class')"
