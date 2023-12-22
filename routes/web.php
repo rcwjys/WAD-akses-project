@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\subClassController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 // * Middleware
@@ -20,6 +21,8 @@ Route::get('/persediaan-obat', [indexController::class, 'accessMedicinePage'])->
 Route::get('/login', [LoginController::class, 'loginPage'])->name('admin.loginPage')->middleware([GuestMiddleware::class]);
 
 route::post('/login', [LoginController::class, 'loginProcess'])->middleware([GuestMiddleware::class]);
+
+route::post('/messages/create', [MessageController::class, 'store'])->name('message.create');
 
 
 // * Routing For Admin
@@ -39,7 +42,11 @@ route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassContr
 
 route::put('/medicine-sub-class/detail/edit', [subClassController::class, 'submitEdiFormSubClass'])->middleware([AuthMiddleware::class]);
 
+route::get('/messages', [MessageController::class, 'index']);
 
+route::get('/messages/{messageId}', [MessageController::class, 'showDetail'])->name('message-detail');
+
+route::get('/messages/delete/{messagheId}', [MessageController::class, 'deleteMessage']);
 
 
 // * Authentication 
