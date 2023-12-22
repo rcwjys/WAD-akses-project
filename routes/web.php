@@ -41,6 +41,10 @@ route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassContr
 
 route::put('/medicine-sub-class/detail/edit', [subClassController::class, 'submitEdiFormSubClass'])->middleware([AuthMiddleware::class]);
 
+// Nafi
+
+route::get('/medicine' , [MedicineController::class, 'index']);
+
 #puput
 route::get('/medicine-class', [MedicineController::class, 'classPage'])->name('admin.medicine-class')->middleware([AuthMiddleware::class]);
 
