@@ -11,10 +11,10 @@ class ClassMedicine extends Model
 
     protected $table = 'therapyclasses';
 
-    protected $primaryKey = 'TherapyClassId';
+    protected $primaryKey = 'therapyClassId';
 
-    protected $guarded = ['TherapyClassId'];
+    protected $guarded = ['therapyClassId'];
 
-    protected $fillable = ['therapyClassName', 'therapyClassId'];
+    protected $fillable = ['therapyClassName', 'created_at','updated_at'];
 
 }

@@ -2,7 +2,7 @@
 @extends('admin.template.main-template')
 
 <!-- Set Title Halaman -->
-@section('title', 'Edit Sub Kelas Obat | UPTD Puskesmas Babakan Tarogong')
+@section('title', 'Edit  Kelas Obat | UPTD Puskesmas Babakan Tarogong')
 
 @section('class', 'active')
 
@@ -11,7 +11,7 @@
 
     <main>
         <div class="container mt-5">
-            <form action="/medicine-class/detail/edit" method="POST">
+        <form action="/medicine-class/detail/edit" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-row">
@@ -19,8 +19,8 @@
                         <label for="inputPassword4">ID Kelas Terapi</label>
                         <input type="text" name="therapyClassID"
                             class="form-control @error('therapyClassID') is-invalid @enderror" required
-                            value="{{ old('therapyClassID') }}" id="inputPassword4"
-                            placeholder="Nama ID Terapi">
+                            value="{{ $MedicineClass->therapyClassId }}" id="inputPassword4"
+                            disabled>
                         @error('therapyClassID')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -31,7 +31,7 @@
                             <label for="inputPassword4">Nama Kelas Terapi</label>
                             <input type="text" name="therapyClassName"
                                 class="form-control @error('therapyClassName') is-invalid @enderror" required
-                                value="{{ old('therapyClassName') }}" id="inputPassword4"
+                                value="{{ $MedicineClass->therapyClassName }}" id="inputPassword4"
                                 placeholder="Nama Kelas Terapi">
                             @error('therapyClassName')
                                 <div class="invalid-feedback">
