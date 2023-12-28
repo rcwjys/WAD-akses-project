@@ -52,7 +52,7 @@ route::get('/medicine-class/detail/{TherapyClassId}', [MedicineController::class
 
 route::get('/medicine-class/delete/{TherapyClassId}', [MedicineController::class, 'deleteClass'])->name('admin.delete-class')->middleware([AuthMiddleware::class]);
 
-route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::class, 'getEditform'])->name('admin.edit-form-class')->middleware([AuthMiddleware::class]);
+route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::class, 'getEditformClass'])->name('admin.edit-form-class')->middleware([AuthMiddleware::class]);
 
 route::put('/medicine-class/detail/edit', [MedicineController::class, 'submitEditFormClass'])->middleware([AuthMiddleware::class]);
 

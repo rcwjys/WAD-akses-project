@@ -58,7 +58,7 @@ class  MedicineController extends Controller
         return redirect(route('admin.medicine-class'));
     }
 
-    public function getEditform(Request $request)
+    public function getEditformClass(Request $request)
     {
         $MedicineClass = DB::table('therapyclasses')->where('TherapyClassId', $request->TherapyClassId)->first();
 
@@ -72,7 +72,6 @@ class  MedicineController extends Controller
     {
         $data = ClassMedicine::find($request->therapyClassId);
         $data->therapyClassName = $request->therapyClassName;
-        $data->therapyClassId = $request->therapyClassId;
         $data->save();
 
         session()->flash('EditClassMessage', 'Proses Perubahan Data Berhasil');
