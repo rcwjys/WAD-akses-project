@@ -48,7 +48,9 @@ route::get('/messages', [MessageController::class, 'index']);
 
 route::get('/messages/{messageId}', [MessageController::class, 'showDetail'])->name('message-detail');
 
-route::get('/messages/delete/{messagheId}', [MessageController::class, 'deleteMessage']);
+route::get('/messages/delete/{messageId}', [MessageController::class, 'deleteMessage']);
+
+route::get('/messages/edit/{messageId}', [MessageController::class, 'editMessage']);
 
 route::get('/medicine-class', [MedicineController::class, 'classPage'])->name('admin.medicine-class')->middleware([AuthMiddleware::class]);
 
