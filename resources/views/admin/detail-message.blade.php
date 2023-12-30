@@ -29,6 +29,7 @@
 
     <a type="button" class="btn back-btn mt-5" href="{{ url('/messages') }}">Kembali</a>
     <a type="button" class="btn back-btn mt-5 ml-3" target="_blank" href="mailto:{{ $message['customerEmail'] }}?subject=no-reply-UPTD-Puskesmas-Babakan-Tarogong">Balas Via Email</a>
+    <a type="button" class="btn btn-danger mt-5 edit-button ml-3" href="{{ url('/messages/edit/'.$message->messageId) }}">Edit</a>
     <a type="button" class="btn btn-danger mt-5 delete-button ml-3" href="{{ url('/messages/delete/'.$message->messageId) }}">Hapus Data Pesan</a>
 </div>
 @endsection

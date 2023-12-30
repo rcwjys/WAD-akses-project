@@ -50,7 +50,11 @@ route::get('/messages', [MessageController::class, 'index']);
 
 route::get('/messages/{messageId}', [MessageController::class, 'showDetail'])->name('message-detail');
 
-route::get('/messages/delete/{messagheId}', [MessageController::class, 'deleteMessage']);
+route::get('/messages/delete/{messageId}', [MessageController::class, 'deleteMessage']);
+
+route::get('/messages/edit/{messageId}', [MessageController::class, 'editMessage'])->name('admin.edit-message')->middleware([AuthMiddleware::class]);
+
+route::put('/message/edit', [MessageController::class, 'submitEditMessage'])->middleware([AuthMiddleware::class]);
 
 route::get('/medicine-class', [MedicineController::class, 'classPage'])->name('admin.medicine-class')->middleware([AuthMiddleware::class]);
 
