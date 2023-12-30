@@ -44,6 +44,8 @@ route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassContr
 
 route::put('/medicine-sub-class/detail/edit', [subClassController::class, 'submitEdiFormSubClass'])->middleware([AuthMiddleware::class]);
 
+route::get('/medicine' , [MedicineController::class, 'index']);
+
 route::get('/messages', [MessageController::class, 'index']);
 
 route::get('/messages/{messageId}', [MessageController::class, 'showDetail'])->name('message-detail');
