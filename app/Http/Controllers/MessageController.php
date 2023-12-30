@@ -39,12 +39,22 @@ class MessageController extends Controller
 
     public function editMessage(Request $request)
     {
+        $message = DB::table('messages')->where('messageId', $request->messageId)->first();
+
+        $messages = DB::table('messages')->select()->get();
+
+        return view('admin.edit-message')->with(compact('message','messages'));
 
     }
 
     public function submitEditMessage(Request $request)
     {
-        
+        $data = Message::find($request->messageId);
+        $data->customerEmail = $request->customerEmail;
+        $data->save();
+
+        session()->flash('editMessage', 'Proses Edit Berhasil');
+        return redirect('/messages');
     }
 
     public function deleteMessage(Request $request)
