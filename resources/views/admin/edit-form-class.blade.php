@@ -28,22 +28,20 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                            <label for="inputPassword4">Nama Kelas Terapi</label>
-                            <input type="text" name="therapyClassName"
-                                class="form-control @error('therapyClassName') is-invalid @enderror" required
-                                value="{{ $MedicineClass->therapyClassName }}" id="inputPassword4"
-                                placeholder="Nama Kelas Terapi">
-                            @error('therapyClassName')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                        <label for="inputPassword4">Nama Kelas Terapi</label>
+                        <input type="text" name="therapyClassName"
+                            class="form-control @error('therapyClassName') is-invalid @enderror" required
+                            value="{{ $MedicineClass->therapyClassName }}" id="inputPassword4"
+                            placeholder="Nama Kelas Terapi">
+                        @error('therapyClassName')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <input type="hidden" name="therapyClassId" value="{{ $MedicineClass->therapyClassId }}">
                 </div>
                 <a href="{{ route('admin.edit-form-class', ['TherapyClassId' => $MedicineClass->therapyClassId]) }}" class="btn btn-primary back-btn">Kembali</a>
-
-
                 <button type="submit" name="submit" class="btn btn-primary submit-button ml-3">Edit</button>
 
             </form>
