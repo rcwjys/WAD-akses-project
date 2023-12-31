@@ -8,6 +8,7 @@ use App\Http\Controllers\subClassController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
 // * Middleware
@@ -44,8 +45,6 @@ route::get('/medicine-sub-class/detail/edit/{subTherapyClassId}', [subClassContr
 
 route::put('/medicine-sub-class/detail/edit', [subClassController::class, 'submitEdiFormSubClass'])->middleware([AuthMiddleware::class]);
 
-route::get('/medicine' , [MedicineController::class, 'index']);
-
 route::get('/messages', [MessageController::class, 'index']);
 
 route::get('/messages/{messageId}', [MessageController::class, 'showDetail'])->name('message-detail');
@@ -69,6 +68,14 @@ route::get('/medicine-class/delete/{TherapyClassId}', [MedicineController::class
 route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::class, 'getEditformClass'])->name('admin.edit-form-class')->middleware([AuthMiddleware::class]);
 
 route::put('/medicine-class/detail/edit', [MedicineController::class, 'submitEditFormClass'])->middleware([AuthMiddleware::class]);
+
+route::get('/medicine-stock' , [StockController::class, 'index'])->name("admin.medicine-stock");
+
+route::get('/medicine-stock/create' , [StockController::class, 'stockCreate'])->name('admin.medicines-create');
+
+route::post('/medicine-stock/create/' , [StockController::class, 'submitFormForStock'])->name('admin.submit-form-stock');
+
+
 
 // * Authentication 
 Route::get('/register', [RegisterController::class, 'registerPage'])->name('admin.registerPage')->middleware([AuthMiddleware::class]);
