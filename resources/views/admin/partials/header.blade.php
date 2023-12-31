@@ -48,13 +48,15 @@
                                  <a class="nav-link @yield('formularium')" href="">Formularium</a>
                              </li>
                              <li class="nav-item">
+
                                  <a class="nav-link @yield('persediaan')" href="{{ url('/medicine-stock') }}" >persediaan</a>
+
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link @yield('Laporan')" href="">Laporan</a>
                              </li>
                              <li class="nav-item">
-                                 <a class="nav-link @yield('kelola pegawai')" href="">kelola Pegawai</a>
+                                 <a class="nav-link @yield('kelola pegawai')" href="{{ url('/employee') }}">Kelola Pegawai</a>
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link @yield('pesan')" href="{{ url('/messages') }}">pesan</a>

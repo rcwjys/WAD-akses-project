@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 // * Middleware
@@ -69,11 +70,13 @@ route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::
 
 route::put('/medicine-class/detail/edit', [MedicineController::class, 'submitEditFormClass'])->middleware([AuthMiddleware::class]);
 
+
 route::get('/medicine-stock' , [StockController::class, 'index'])->name("admin.medicine-stock");
 
 route::get('/medicine-stock/create' , [StockController::class, 'stockCreate'])->name('admin.medicines-create');
 
 route::post('/medicine-stock/create/' , [StockController::class, 'submitFormForStock'])->name('admin.submit-form-stock');
+
 
 
 
@@ -83,3 +86,11 @@ Route::get('/register', [RegisterController::class, 'registerPage'])->name('admi
 Route::post('/register', [RegisterController::class, 'registerProcess'])->middleware([AuthMiddleware::class]);
 
 route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout')->middleware([AuthMiddleware::class]);
+
+// * Manage Employee
+route::get('/employee', [EmployeeController::class, 'employee'])->name('admin.employee')->middleware([AuthMiddleware::class]);
+route::get('/employee/create', [EmployeeController::class, 'Addemployee'])->name('admin.add-employee')->middleware([AuthMiddleware::class]);
+route::post('/employee/create', [EmployeeController::class, 'SubmitAddemployee'])->middleware([AuthMiddleware::class]);
+route::get('/employee/edit-employee/{id}', [EmployeeController::class, 'Editemployee'])->middleware([AuthMiddleware::class]);
+route::put('/employee/edit-employee/{id}', [EmployeeController::class, 'SubmitEditemployee'])->name('employee.update')->middleware([AuthMiddleware::class]);
+route::get('/employee/edit-employee/delete/{id}', [EmployeeController::class, 'deleteEmployee'])->name('employee.delete')->middleware([AuthMiddleware::class]);
