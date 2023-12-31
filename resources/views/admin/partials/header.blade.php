@@ -48,7 +48,9 @@
                                  <a class="nav-link @yield('formularium')" href="">Formularium</a>
                              </li>
                              <li class="nav-item">
-                                 <a class="nav-link @yield('persediaan')" href="">Persediaan</a>
+
+                                 <a class="nav-link @yield('persediaan')" href="{{ url('/medicine-stock') }}" >persediaan</a>
+
                              </li>
                              <li class="nav-item">
                                  <a class="nav-link @yield('Laporan')" href="">Laporan</a>
