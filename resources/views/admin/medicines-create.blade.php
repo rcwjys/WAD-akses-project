@@ -11,7 +11,7 @@
 <!-- Set Title Halaman -->
 @section('title', 'Stok Obat | UPTD Puskesmas Babakan Tarogong')
 
-@section('class', 'active')
+@section('medicine', 'active')
 
 <!-- Import Layouting -->
 @section('content')
@@ -50,8 +50,8 @@
 
 
                 <div class="form-group">
-                    <label for="medicineRecipe">Resep Obat</label>
-                    <select class="form-control" name="medicineRecipe" required>
+                    <label for="recipeId">Resep Obat</label>
+                    <select class="form-control" name="recipeId" required>
                         <option value="" selected>Resep Obat</option>
                         @foreach ($recipes as $recipe)
                             <option value="{{ $recipe->recipeId }}">{{ $recipe->recipe }}</option>
@@ -60,8 +60,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="classTherapy">Kelas Terapi</label>
-                    <select class="form-control" id="classTherapy" name="classTherapy" required>
+                    <label for="therapyClassId">Kelas Terapi</label>
+                    <select class="form-control" id="classTherapy" name="therapyClassId" required>
                         <option value="" selected disabled>Kelas Terapi</option>
                         @foreach ($therapyclasses as $therapy)
                             <option value="{{ $therapy['therapyClassId'] }}">{{ $therapy['therapyClassName'] }}</option>
@@ -70,8 +70,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="subClassTherapy">Sub Kelas Terapi</label>
-                    <select class="form-control" id="subClassTherapy" name="subClassTherapy" required>
+                    <label for="subTherapyClassId">Sub Kelas Terapi</label>
+                    <select class="form-control" id="subTherapyClassId" name="subTherapyClassId" required>
                         <option value="" selected disabled>Sub Kelas Terapi</option>
                         @foreach ($subClassTherapyClass as $subTherapy)
                             <option value="{{ $subTherapy['subTherapyClassId'] }}">{{ $subTherapy['subTherapyClassName'] }}</option>
@@ -80,8 +80,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="medicineUnit">Satuan</label>
-                    <select class="form-control" id="medicineUnit" name="medicineUnit" required>
+                    <label for="medicineUnitId">Satuan</label>
+                    <select class="form-control" id="medicineUnitId" name="medicineUnitId" required>
                         <option value="" selected disabled>Satuan Obat</option>
                         @foreach ($units as $unit)
                             <option value="{{ $unit['medicineUnitId'] }}">{{ $unit['recipe'] }}</option>

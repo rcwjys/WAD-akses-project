@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
     protected $Medicine;
-
+    
+    //      ADMIN
     public function index()
     {
 
@@ -27,11 +28,6 @@ class StockController extends Controller
         return view('admin.medicines-create');
     }
 
-    public function getFormForStock()
-    {
-        $medicine = DB::table('medicines')->select()->get();
-        return view('admin.medicines-create')->with('medicines', $medicines);
-    }
 
     public function submitFormForStock(Request $request)
     {
@@ -41,56 +37,63 @@ class StockController extends Controller
             'medicineInformation' => ['required', 'min:3'],
             'expiredDate' => ['required'],
             'medicinePeriod' => ['required'],
-            'recipeId' => ['required'],
-            'medicineUnitId' => ['required'],
-            'therapyClassId' => ['required'],
-            'subTherapyClassId' => ['required']
+            'recipe' => ['required'],
+            'recipe' => ['required'],
+            'therapyClassName' => ['required'],
+            'subTherapyClassName' => ['required']
         ]);
 
         Medicine::create($validateForStock);
+        $recipe = DB::table('recipe')->where('recipeId', $request->recipeId)->first();
+        $medicineunits = DB::table('recipe')->where('medicineUnitId', $request->medicineUnitId)->first();
+        $therapyclass = DB::table('therapyClassName')->where('therapyClassId', $request->therapyClassId)->first();
+        $subtherapyclass = DB::table('subTherapyClassName')->where('subTherapyClassId', $request->subTherapyClassId)->first();
+
+        return view('admin.medicines-detail')->with(compact('medicine', 'medicineunits'));
 
         session()->flash('StockMessageSuccess', 'Menambahkan Stok Obat Berhasil');
 
         return redirect(route('admin.medicines-stock'));
     }
     
-    public function addMedicine() {
-        Medicine::create([
-            $data = 'medicineName' => ['medicineName'],
-            $data = 'medicineStock' => ['medicineStock'],
-            $data = 'medicineInformation' => ['medicineInformation'],
-            $data = 'expiredDate' => ['expiredDate'],
-            $data = 'medicinePeriod' => ['medicinePeriod'],
-            $data = 'recipeId' => ['recipeId'],
-            $data = 'medicineUnitId' => ['medicineUnitId'],
-            $data = 'therapyClassId' => ['therapyClassId'],
-            $data = 'subTherapyClassId' => ['subTherapyClassId']
+    public function addMedicine(Request $request) {
+
+        $medicine = $request->validate([
+            'medicineName' => ['required'], 
+            'medicineStock' => ['required'], 
+            'medicineInformation' => ['required'], 
+            'expiredDate' => ['required'], 
+            'medicinePeriod' => ['required'], 
+            'recipeId' => ['required'], 
+            // 'medicineRecipe' => ['required'],
+            'medicineUnitId' => ['required'], 
+            'therapyClassId' => ['required'], 
+            'subTherapyClassId' => ['required']
         ]);
+
+        Medicine::create($medicine);
 
         return redirect(route('admin.medicine-stock'));
 
     }
 
-    public function showFormTherapyClass(){
-        $therapyclasses = TherapyClass::all();
-        return view('admin.medicine-create', ['therapyclasses' => $therapyclasses]);
-    }
-
     public function editStock(Request $request)
     {
         $stock = DB::table('medicines')->where('medicineId', $request->medicineId)->first();
-        $stock = DB::table('medicines')->select()->get();
-        return view('admin.editStock')->with(compact('stock','stocks'));
+        $medicineunits = DB::table('medicineunits')->where('medicineUnitId', $stock->medicineUnitId)->first();
+        $therapyclass = DB::table('therapyclasses')->where('therapyClassId', $stock->therapyClassId)->first();
+        $subtherapyclass = DB::table('subtherapyclasses')->where('subTherapyClassId', $stock->subTherapyClassId)->first();
+        $medicinerecipe = DB::table('medicinerecipes')->where('recipeId', $stock->recipeId)->first();
+        $medicineRecipes = DB::table('medicinerecipes')->select()->get();
+        $therapyclasses = DB::table('therapyclasses')->select()->get();
+        $subtherapyclasses = DB::table('subtherapyclasses')->select()->get();
+        $medicineUnits = DB::table('medicineunits')->select()->get();
+        return view('admin.medicines-edit')->with(compact('stock','medicineRecipes','therapyclasses','subtherapyclasses','medicineUnits','medicineunits','therapyclass','subtherapyclass','medicinerecipe'));
     }
 
-    public function showFormRecipe() {
-        $recipes = MedicineRecipe::all();
-        return view('admin.medicines-create', ['recipe' => $recipes]);
-    }
-
-    public function submitEditStock(Request $request)
+    public function submitEditStock(Request $request, string $medicineId)
     {
-        $data = Stock::find($request->medicineId);
+        $data = Medicine::find($medicineId);
         $data-> medicineName = $request->medicineName;
         $data-> medicineStock = $request->medicineStock;
         $data-> medicineInformation = $request->medicineInformation;
@@ -103,6 +106,32 @@ class StockController extends Controller
         $data-> save();
 
         session()->flash('EditClassMessage', 'Proses Perubahan Data Berhasil');
-        return redirect(route('admin.stock'));
+        return redirect(route('admin.medicine-stock'));
+    }
+
+    public function detailStock(Request $request)
+     {
+        
+        $medicine = DB::table('medicines')->where('medicineId', $request->medicineId)->first();
+        // $recipe = DB::table('recipe')->where('recipeId', $medicine->recipeId)->first();
+        $medicineunits = DB::table('medicineunits')->where('medicineUnitId', $medicine->medicineUnitId)->first();
+        $therapyclass = DB::table('therapyclasses')->where('therapyClassId', $medicine->therapyClassId)->first();
+        $subtherapyclass = DB::table('subtherapyclasses')->where('subTherapyClassId', $medicine->subTherapyClassId)->first();
+        $medicinerecipe = DB::table('medicinerecipes')->where('recipeId', $medicine->recipeId)->first();
+
+        return view('admin.medicines-detail')->with(compact('medicine', 'medicineunits','therapyclass','subtherapyclass','medicinerecipe'));
+
+    }
+
+    public function deleteStock(Request $request)
+    {
+        //DB::table('medicines')->where('medicineId', $request->medicineId)->delete();
+
+        $medicine = Medicine::find($request->medicineId);
+        $medicine ->delete();
+
+        session()->flash('deleteStock', 'Proses Penghapusan Obat Berhasil');
+
+        return redirect(route('admin.medicine-stock'));
     }
 }

@@ -4,7 +4,7 @@
 <!-- Set Title Halaman -->
 @section('title', 'Edit  Kelas Obat | UPTD Puskesmas Babakan Tarogong')
 
-@section('class', 'active')
+@section('medicine', 'active')
 
 <!-- Import Layouting -->
 @section('content')
@@ -12,20 +12,19 @@
     <main>
         <div class="container mt-5">
             <!-- Add Medicine Button -->
-            <a href="{{ route('medicines-create') }}" class="btn btn-primary mt-5 medicine-add-btn">+ Tambah data persediaan obat</a>
+            <a href="{{ route('admin.medicines-create') }}" class="btn btn-primary mt-5 medicine-add-btn">+ Tambah data persediaan obat</a>
 
             @if ($medicines)
                 @php $isCanViewDetail = true; @endphp
                 <div class="row mt-5">
                     @foreach ($medicines as $medicine)
-                    dd();
                         <div class="col-lg-3">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        {{ htmlspecialchars($medicine['medicineName']) }}
+                                        {{ htmlspecialchars($medicine->medicineName) }}
                                     </h5>
-                                    <a href="{{ route('medicines-detail', $medicine['medicineId']) }}" class="card-link" style="color: #019F90;">Details</a>
+                                    <a href="{{ route('admin.medicines-detail', ['medicineId' => $medicine->medicineId]) }}" class="card-link" style="color: #019F90;">Details</a>
                                 </div>
                             </div>
                         </div>
@@ -55,6 +54,4 @@
     <!-- custom js -->
     <script src="{{ asset('js/custom.js') }}"></script>
 
-    <!-- footer section -->
-    <!-- footer section -->
 @endsection

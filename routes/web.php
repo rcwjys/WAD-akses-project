@@ -27,6 +27,7 @@ route::post('/login', [LoginController::class, 'loginProcess'])->middleware([Gue
 
 route::post('/messages/create', [MessageController::class, 'store'])->name('message.create');
 
+route::get('/persediaan-obat/detail-obat/{medicineId}', [indexController::class, 'detailStockCustomer'])->name('detailMedicinePage');
 
 // * Routing For Admin
 route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('admin.dashboard')->middleware([AuthMiddleware::class]);
@@ -69,11 +70,21 @@ route::get('/medicine-class/detail/edit/{TherapyClassId}', [MedicineController::
 
 route::put('/medicine-class/detail/edit', [MedicineController::class, 'submitEditFormClass'])->middleware([AuthMiddleware::class]);
 
+// Persediaan Obat
+
 route::get('/medicine-stock' , [StockController::class, 'index'])->name("admin.medicine-stock");
 
-route::get('/medicine-stock/create' , [StockController::class, 'stockCreate'])->name('admin.medicines-create');
+route::get('/medicine-stock/create/' , [StockController::class, 'stockCreate'])->name('admin.medicines-create');
 
-route::post('/medicine-stock/create/' , [StockController::class, 'submitFormForStock'])->name('admin.submit-form-stock');
+route::post('/medicine-stock/create' , [StockController::class, 'addMedicine']);
+
+route::get('/medicine-stock/detail/edit/{medicineId}' , [StockController::class, 'editStock'])->name('admin.medicines-edit');
+
+route::put('/medicine-stock/detail/edit/{medicineId}' , [StockController::class, 'submitEditStock'])->name('admin.submit-medicines-edit');
+
+route::get('/medicine-stock/detail/{medicineId}' , [StockController::class, 'detailStock'])->name('admin.medicines-detail');
+
+route::delete('/medicine-stock/detail/delete/{medicineId}' , [StockController::class, 'deleteStock']);
 
 
 
